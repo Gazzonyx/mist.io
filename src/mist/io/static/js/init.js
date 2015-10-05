@@ -383,6 +383,10 @@ var setupMainChannel = function(socket, callback) {
 
         var dialogBody = [];
 
+        dialogBody.push({
+            paragraph: data.title + ' at machine:'
+        });
+
         // Extract machine information
         var machineId = data.machine_id;
         var backendId = data.backend_id;
@@ -391,7 +395,7 @@ var setupMainChannel = function(socket, callback) {
         if (machine && machine.id) {
             dialogBody.push({
                 link: machine.name,
-                class: 'ui-btn ui-btn-d ui-shadow',
+                class: 'ui-btn ui-btn-d ui-shadow machine',
                 href: '#/machines/' + machineId,
                 closeDialog: true,
             });
@@ -415,14 +419,14 @@ var setupMainChannel = function(socket, callback) {
             var durationMins = parseInt(duration / 60);
             var durationSecs = duration - (durationMins * 60);
             dialogBody.push({
-                paragraph: 'Completed in ' + durationMins + 'min ' + durationSecs + ' sec',
+                paragraph: 'Completed in ' + durationMins + ' min ' + durationSecs + ' sec',
                 class: 'duration'
             });
         }
 
         Mist.dialogController.open({
-            type: DIALOG_TYPES.OK,
-            head: data.title,
+            type: DIALOG_TYPES.PLAIN,
+            head: data.error ? 'Failure' : 'Success',
             body: dialogBody
         });
     })

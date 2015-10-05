@@ -70,40 +70,42 @@
                 <a class="ui-btn ui-shadow ui-btn-d ui-caps"
                     {{action "confirm" target=view}}>OK</a>
 
-            {{else}}{{#if view.isBack}}
-
-                <a class="ui-btn ui-btn-a ui-caps back"
-                    {{action "confirm" target=view}}>Back</a>
-
             {{else}}
+                {{#if view.isBack}}
 
-                <div class="ok-cancel" data-role="controlgroup" data-type="horizontal">
+                    <a class="ui-btn ui-btn-a ui-caps back"
+                        {{action "confirm" target=view}}>Back</a>
 
-                    {{#if view.isOKCancel}}
-                        <a class="ui-btn ui-caps back"
-                            {{action "reject" target=view}}>
-                                Cancel
-                        </a>
-                        <a class="ui-btn ui-btn-d ui-shadow ui-caps ui-shadow"
-                            {{action "confirm" target=view}}>
-                                OK
-                        </a>
-                    {{/if}}
+                {{else}}
+                    {{#unless view.isPlain}}
+                    <div class="ok-cancel" data-role="controlgroup" data-type="horizontal">
 
-                    {{#if view.isYesNo}}
-                        <a class="ui-btn ui-caps back"
-                            {{action "reject" target=view}}>
-                                No
-                        </a>
-                        <a class="ui-btn ui-caps ui-shadow {{if Mist.dialogController.options.danger 'no' 'ui-btn-d'}}"
-                            {{action "confirm" target=view}}>
-                                Yes
-                        </a>
-                    {{/if}}
+                        {{#if view.isOKCancel}}
+                            <a class="ui-btn ui-caps back"
+                                {{action "reject" target=view}}>
+                                    Cancel
+                            </a>
+                            <a class="ui-btn ui-btn-d ui-shadow ui-caps ui-shadow"
+                                {{action "confirm" target=view}}>
+                                    OK
+                            </a>
+                        {{/if}}
 
-                </div>
+                        {{#if view.isYesNo}}
+                            <a class="ui-btn ui-caps back"
+                                {{action "reject" target=view}}>
+                                    No
+                            </a>
+                            <a class="ui-btn ui-caps ui-shadow {{if Mist.dialogController.options.danger 'no' 'ui-btn-d'}}"
+                                {{action "confirm" target=view}}>
+                                    Yes
+                            </a>
+                        {{/if}}
 
-            {{/if}}{{/if}}
+                    </div>
+                    {{/unless}}
+                {{/if}}
+            {{/if}}
 
         </div>
     </div>

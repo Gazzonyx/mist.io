@@ -27,6 +27,11 @@ define('app/views/dialog', ['app/views/popup'],
             }.property('Mist.dialogController.type'),
 
 
+            isPlain: function () {
+                return Mist.dialogController.type == DIALOG_TYPES.PLAIN;
+            }.property('Mist.dialogController.type'),
+
+
             isOKCancel: function () {
                 return Mist.dialogController.type == DIALOG_TYPES.OK_CANCEL;
             }.property('Mist.dialogController.type'),
