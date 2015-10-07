@@ -75,8 +75,6 @@ define('app/controllers/backends', ['app/models/backend', 'ember'],
                             }
                         ]
                     });
-                    Mist.notificationController.notify(
-                        'Failed to add backend: ' + message);
                 }).complete(function (success, backend) {
                     that.set('addingBackend', false);
                     if (args.callback) args.callback(success, backend);
