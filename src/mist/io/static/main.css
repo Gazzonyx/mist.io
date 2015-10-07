@@ -1470,6 +1470,12 @@ ul.checkbox-list .ui-grid-b {
     display: inline-block;
 }
 
+#dialog-popup .message-error {
+    background-color: #d96557;
+    color: #fff;
+    padding: 5px;
+}
+
 /* Border radius override */
 .ui-corner-all {
     -webkit-border-radius: 0 /*{global-radii-blocks}*/;

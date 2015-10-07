@@ -65,6 +65,16 @@ define('app/controllers/backends', ['app/models/backend', 'ember'],
                 .success(function (backend) {
                     that._addBackend(backend, key);
                 }).error(function (message) {
+                    Mist.dialogController.open({
+                        type: DIALOG_TYPES.PLAIN,
+                        head: 'Failure',
+                        body: [
+                            {
+                                paragraph: 'Failed to add backend: ' + message,
+                                class: 'message-error'
+                            }
+                        ]
+                    });
                     Mist.notificationController.notify(
                         'Failed to add backend: ' + message);
                 }).complete(function (success, backend) {
