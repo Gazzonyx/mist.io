@@ -88,7 +88,7 @@ def ssh_command(email, backend_id, machine_id, host, command,
     shell.disconnect()
     if retval:
         from mist.io.methods import notify_user
-        notify_user(user, "Async command failed for machine %s (%s)" %
+        notify_user(user, "Async command failed at machine with id: %s (%s)" %
                     (machine_id, host), output)
 
 
@@ -196,6 +196,7 @@ def post_deploy_steps(self, email, backend_id, machine_id, monitoring, command,
                 output = output.decode('utf-8','ignore')
                 title = "Deployment script %s" % ('failed' if retval
                                                   else 'succeeded')
+                title += "at machine: %s" % node.name
                 error = retval > 0
                 notify_user(user, title,
                             backend_id=backend_id,
@@ -225,7 +226,7 @@ def post_deploy_steps(self, email, backend_id, machine_id, monitoring, command,
                 except Exception as e:
                     print repr(e)
                     error = True
-                    notify_user(user, "Enable monitoring failed for machine %s" % machine_id, repr(e))
+                    notify_user(user, "Enable monitoring failed at machine: %s" % node.name, repr(e))
                     notify_admin('Enable monitoring on creation failed for user %s machine %s: %r' % (email, machine_id, e))
                     log_event(action='enable_monitoring_failed', error=repr(e),
                               **log_dict)
@@ -249,7 +250,7 @@ def post_deploy_steps(self, email, backend_id, machine_id, monitoring, command,
         tmp_log(repr(exc))
         if str(exc).startswith('Retry'):
             raise
-        notify_user(user, "Deployment script failed for machine %s" % machine_id)
+        notify_user(user, "Deployment script failed at machine with id: %s" % machine_id)
         notify_admin("Deployment script failed for machine %s in backend %s by user %s" % (machine_id, backend_id, email), repr(exc))
         log_event(
             email=email,

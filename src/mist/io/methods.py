@@ -3883,7 +3883,8 @@ def run_playbook(user, backend_id, machine_id, playbook_path, extra_vars=None,
 
 def _notify_playbook_result(user, res, backend_id=None, machine_id=None,
                             extra_vars=None, label='Ansible playbook'):
-    title = label + (' succeeded' if res['success'] else ' failed')
+    title = label + (' succeeded' if res['success'] else ' failed') 
+    title += "at machine with id: %s" %machine_id
     kwargs = {
         'backend_id': backend_id,
         'machine_id': machine_id,
